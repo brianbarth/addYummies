@@ -10,7 +10,7 @@ const fsCollectionName = 'foods';
 export class FoodService {
 
   cart = this.db.collection<Ifood>(fsCollectionName);
-  newCartItem: {};
+  newCartItem: Ifood;
 
   constructor(private db: AngularFirestore ) {}
 
@@ -21,5 +21,6 @@ export class FoodService {
   addCartData(name: string, type: string, color: string) {
     this.newCartItem = {name: name, type: type, color: color};
     console.log(this.newCartItem);
+    this.cart.add(this.newCartItem);
   }
 }
