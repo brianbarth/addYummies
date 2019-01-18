@@ -8,11 +8,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AppComponent } from './app.component';
 import { FoodTableComponent } from './food-table/food-table.component';
 import { FoodService } from './food.service';
+import { ActionBarComponent } from './action-bar/action-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FoodTableComponent
+    FoodTableComponent,
+    ActionBarComponent
   ],
   imports: [
     BrowserModule,
