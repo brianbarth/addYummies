@@ -17,6 +17,31 @@ export class FoodTableComponent implements OnInit {
     });
   }
 
+  sortByName() {
+    console.log('sorted by name');
+    this.cartData = this.cartData.sort(function(a, b) {
+      if (a.name < b.name) { return -1; }
+      if (a.name > b.name) { return 1; }
+      return 0;
+    });
+  }
+  sortByType() {
+    console.log('sorted by type');
+    this.cartData = this.cartData.sort(function(a, b) {
+      if (a.type < b.type) { return -1; }
+      if (a.type > b.type) { return 1; }
+      return 0;
+    });
+  }
+  sortByColor() {
+    console.log('sorted by color');
+    this.cartData = this.cartData.sort(function(a, b) {
+      if (a.color < b.color) { return -1; }
+      if (a.color > b.color) { return 1; }
+      return 0;
+    });
+  }
+
   ngOnInit() {}
 
 }

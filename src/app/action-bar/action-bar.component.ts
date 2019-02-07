@@ -11,10 +11,12 @@ export class ActionBarComponent implements OnInit {
 
   foodData: Ifood[];
   errorMessage: string | false = false;
+  numItems: number;
 
   constructor( private foodService: FoodService ) {
     foodService.getCartData$().subscribe(data => {
       this.foodData = data;
+      this.numItems = data.length;
     });
   }
 
@@ -22,35 +24,30 @@ export class ActionBarComponent implements OnInit {
   }
 
   onSubmitForm(submittedForm) {
-    let foodNameTest = submittedForm.value.name.toLowerCase();
-    foodNameTest = foodNameTest.charAt(0).toUpperCase() + foodNameTest.slice(1);
+    if (submittedForm.invalid) {
+      console.log('the form is invalid');
+      return;
+    }
+    console.log('the form is valid');
+    const foodNameTest = submittedForm.value.name.toLowerCase();
+    const foodTypeTest = submittedForm.value.type.toLowerCase();
+    const foodColorTest = submittedForm.value.color.toLowerCase();
     if (this.foodData.map( data => data.name ).includes(foodNameTest)) {
-      this.errorMessage = 'FOOD ALREADY IN LIST!';
+      this.errorMessage = foodNameTest.toUpperCase() + ' Already In List!';
       console.log('error: food already included in array');
+      submittedForm.reset();
       return;
     }
     this.foodService.addCartData(
       foodNameTest,
-      submittedForm.value.type,
-      submittedForm.value.color
-      );
-    this.changeMessage();
+      foodTypeTest,
+      foodColorTest
+    );
+    this.errorMessage = false;
+    submittedForm.reset();
   }
-  changeMessage() {
+  resetMessage() {
     this.errorMessage = false;
   }
-
 }
-// onAddItem(newWord: string) {
-//   let word = newWord.toLowerCase();
-//   word = word.charAt(0).toUpperCase() + word.slice(1);
-//   console.log(word);
 
-//   if (this.cartData.map( data => data.name ).includes(word)) {
-//     this.errorMessage = 'FOOD ALREADY EXISTS IN LIST!';
-//     console.log('error: food already included in array');
-//     return;
-//   }
-//   this.cartService.addToCart({ name: word });
-//   console.log('Item Added: ' + word);
-//   this.clearBox();

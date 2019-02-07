@@ -1,15 +1,15 @@
 <div class="container">
-  <table class="table">
-    <thead>
+  <table class="table table-striped">
+    <thead class="thead-dark">
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Type</th>
-        <th scope="col">Color</th>
+        <th (click)="sortByName()" scope="col-4" #name>Name</th>
+        <th (click)="sortByType()" scope="col-4" #type>Type</th>
+        <th (click)="sortByColor()" scope="col-4" #color>Color</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of cartData">
-        <td> {{ item.name }}</td>
+        <td> {{ item.name | titlecase}}</td>
         <td> {{ item.type }} </td>
         <td> {{ item.color }} </td>
       </tr>

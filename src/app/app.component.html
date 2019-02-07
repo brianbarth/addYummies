@@ -1,22 +1,16 @@
 <div class="jumbotron text-center">
   <h1>BIG FOOD LIST!</h1>
+  <app-header></app-header>
 </div>
 
 <div class="container">
-
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <app-action-bar></app-action-bar>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="container">
-    <app-food-table></app-food-table>
-  </div>
-
+  <router-outlet></router-outlet>
 </div>
+
+<hr>
+
+<app-food-table></app-food-table>
+
 
 
 

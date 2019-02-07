@@ -1,17 +1,53 @@
 <form (ngSubmit)="onSubmitForm(form)" #form="ngForm">
-  <div class="form-group">
-    <label for="name">Food Name</label>
-    <input type="text" id="name" name="name" class="form-control" ngModel>
-    <p style="color: red" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <div class="row">
+    <div class="form-group col-xs-12 col-sm-4">
+      <label for="name">Food Name</label>
+      <input
+      type="text"
+      id="name"
+      name="name"
+      class="form-control"
+      ngModel
+      required
+      #nameCtrl="ngModel"
+      (keydown)="resetMessage()">
+      <span class="form-text text-danger" *ngIf="errorMessage && !nameCtrl.touched">{{ errorMessage }}</span>
+      <span class="form-text text-danger" *ngIf="nameCtrl.invalid && nameCtrl.touched">Enter a name!</span>
+    </div>
+    <div class="form-group col-xs-12 col-sm-4">
+      <label for="type">Food Type</label>
+      <select
+      id="type"
+      name="type"
+      class="form-control"
+      ngModel
+      required
+      #typeCtrl="ngModel">
+        <option value="vegetable">Vegetable</option>
+        <option value="fruit">Fruit</option>
+        <option value="grain">Grain</option>
+        <option value="protein">Protein</option>
+        <option value="dairy">Dairy</option>
+        <option value="herbs/spices">herbs/spices</option>
+        <option value="sweets">sweets</option>
+        <span class="form-text text-danger" *ngIf="typeCtrl.invalid && typeCtrl.touched">Please select a type!</span>
+      </select>
+    </div>
+    <div class="form-group col-xs-12 col-sm-4">
+      <label for="color">Food Color</label>
+      <input
+      type="text"
+      id="color"
+      name="color"
+      class="form-control"
+      ngModel
+      required
+      #colorCtrl="ngModel">
+      <span class="form-text text-danger" *ngIf="colorCtrl.invalid && colorCtrl.touched">Please enter a color!</span>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="type">Food Type</label>
-    <input type="text" id="type" name="type" class="form-control" ngModel>
-  </div>
-  <div class="form-group">
-    <label for="color">Food Color</label>
-    <input type="text" id="color" name="color" class="form-control" ngModel>
-  </div>
-  <button type="submit" class="btn btn-primary">Add Food Info</button>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add Food Info</button>
 </form>
+<p>Number of items: {{ numItems }}</p>
+
 
