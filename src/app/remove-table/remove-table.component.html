@@ -1,4 +1,4 @@
-<form (ngSumbit)="onSubmitForm(form)" #form="ngForm">
+<form (ngSubmit)="onSubmitForm(form)" #form="ngForm">
   <div class="row">
     <div class="form-group col">
       <label for="name">Food Name</label>
@@ -9,7 +9,11 @@
         class="form-control"
         ngModel
         required
+        #nameCtrl="ngModel"
+        (keydown)="resetMessage()"
       >
+      <span class="form-text text-danger" *ngIf="errorMessage && !nameCtrl.touched">{{ errorMessage }}</span>
+      <span class="form-text text-danger" *ngIf="nameCtrl.invalid && nameCtrl.touched">Enter a name!</span>
     </div>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Remove Item</button>

@@ -1,1 +1,7 @@
+td {
+  font-size: .75rem;
+}
+@media (min-width: 544px) {
+  td {font-size:1rem;}
+}
 

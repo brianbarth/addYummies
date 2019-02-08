@@ -9,25 +9,39 @@ import { FoodService } from '../food.service';
 })
 export class RemoveTableComponent implements OnInit {
 
-  cartData: Ifood[];
+  foodData: Ifood[];
   numItems: number;
+  errorMessage: string | false = false;
 
   constructor( private foodService: FoodService ) {
     foodService.getCartData$().subscribe(data => {
-      this.cartData = data;
+      this.foodData = data;
       this.numItems = data.length;
     });
   }
 
-  onSubmitForm() {
-
-  }
-
-  removeItem() {
-
-  }
-
   ngOnInit() {
+  }
+
+  onSubmitForm(submittedForm) {
+    if (submittedForm.invalid) {
+      console.log('the form is invalid');
+      return;
+    }
+    const foodNameTest = submittedForm.value.name.toLowerCase();
+    if (this.foodData.map( data => data.name ).includes(foodNameTest)) {
+      this.foodService.removeFoodItem(foodNameTest);
+      this.errorMessage = false;
+      submittedForm.reset();
+      return;
+    }
+    console.log('your item is not in db!');
+    this.errorMessage = 'not in database!';
+    submittedForm.reset();
+  }
+
+  resetMessage() {
+    this.errorMessage = false;
   }
 
 }

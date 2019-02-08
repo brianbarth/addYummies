@@ -21,6 +21,11 @@ export class FoodService {
   addCartData(name: string, type: string, color: string) {
     this.newCartItem = {name: name, type: type, color: color};
     console.log(this.newCartItem);
-    this.cart.add(this.newCartItem);
+    this.cart.doc(name).set(this.newCartItem);
+  }
+
+  removeFoodItem(item: string) {
+    console.log(item + ' was removed from list!');
+    this.cart.doc(item).delete();
   }
 }
