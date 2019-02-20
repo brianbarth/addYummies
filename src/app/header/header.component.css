@@ -6,3 +6,6 @@ nav {
 a {
   padding: 3px 15px;
 }
+#removeButton {
+  margin-right: 6rem;
+}
